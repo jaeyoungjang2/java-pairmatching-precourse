@@ -1,11 +1,17 @@
 package pairmatching.controller;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import pairmatching.GetFile;
 import pairmatching.domain.PairProgrammings;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -85,6 +91,13 @@ public class PairProgrammingController {
         this.targetMission = detailedFunctions[2];
 
         if (targetCourse.equals("백엔드")) {
+            ClassLoader loader = GetFile.class.getClassLoader();
+            try (FileInputStream file = new FileInputStream(Objects.requireNonNull(loader.getResource("backend-crew.md")).getFile());
+                BufferedReader br = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8))) {
+
+                String line = null;
+            } catch (IOException ignored) {
+            }
             shuffledCrew = Randoms.shuffle(backEndCrew);
         }
 
